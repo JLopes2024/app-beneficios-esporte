@@ -27,32 +27,7 @@ export default function Anamnese({
     <section id="avaliacao-section" className="section-card">
       <h2 className="section-title">📝 1. Como está sua rotina?</h2>
       
-      {/* Barra de Tempo */}
-      <div className="status-bar-container">
-        <div className="status-header">
-          <span>Tempo Gasto no Dia: {totalHoras}h / 24h</span>
-          <span className={estaEstourado ? 'status-error' : 'status-ok'}>
-            {estaEstourado ? '⚠️ Passou de 24h!' : '✅ Tudo certo'}
-          </span>
-        </div>
-        <div className="progress-bg">
-          <div 
-            className="progress-fill" 
-            style={{ 
-              width: `${Math.min((totalHoras / 24) * 100, 100)}%`, 
-              background: estaEstourado ? '#e53e3e' : '#0070D1' 
-            }} 
-          />
-        </div>
-      </div>
-
-      {/* Tempo Livre */}
-      <div className="tempo-livre-card">
-        <span className="label-livre">Seu Tempo Livre:</span>
-        <span className={tempoLivre < 0 ? 'valor-erro' : 'valor-ok'}>
-          {tempoLivre >= 0 ? `${tempoLivre} horas` : '⚠️ Rotina impossível (reveja os horários)'}
-        </span>
-      </div>
+      
 
       <div className="grid-2-col">
         <div className="form-group">
@@ -125,6 +100,33 @@ export default function Anamnese({
             </select>
           </div>
         </div>
+        
+      </div>
+      {/* Barra de Tempo */}
+      <div className="status-bar-container">
+        <div className="status-header">
+          <span>Tempo Gasto no Dia: {totalHoras}h / 24h</span>
+          <span className={estaEstourado ? 'status-error' : 'status-ok'}>
+            {estaEstourado ? '⚠️ Passou de 24h!' : '✅ Tudo certo'}
+          </span>
+        </div>
+        <div className="progress-bg">
+          <div 
+            className="progress-fill" 
+            style={{ 
+              width: `${Math.min((totalHoras / 24) * 100, 100)}%`, 
+              background: estaEstourado ? '#e53e3e' : '#0070D1' 
+            }} 
+          />
+        </div>
+      </div>
+
+      {/* Tempo Livre */}
+      <div className="tempo-livre-card">
+        <span className="label-livre">Seu Tempo Livre:</span>
+        <span className={tempoLivre < 0 ? 'valor-erro' : 'valor-ok'}>
+          {tempoLivre >= 0 ? `${tempoLivre} horas` : '⚠️ Rotina impossível (reveja os horários)'}
+        </span>
       </div>
     </section>
   );
