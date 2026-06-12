@@ -77,6 +77,7 @@ function App() {
       </main>
 
       <p className="disclaimer">Este é um aplicativo apenas para fins educacionais e não substitui a orientação de um profissional de saúde.</p>
+      <p className="revisao"><b>Lívia Mara</b> - Jovem Aprendiz <span className="revisao-span">Revisão</span></p>
     </div>
   );
 }

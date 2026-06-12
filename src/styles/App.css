@@ -368,6 +368,19 @@ input[type="range"]:hover::-webkit-slider-thumb {
   font-style: italic;
   font-weight: 500;
 }
+.revisao {
+  font-size: 0.75rem;
+  color: #fc1965;
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+}
+.revisao-span {
+  color: #740228;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
 
 .disclaimer::before {
   content: 'ℹ️ ';
