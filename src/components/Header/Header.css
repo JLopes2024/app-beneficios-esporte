@@ -1,0 +1,15 @@
+.main-header {
+  background-color: #000000;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #0070D1;
+  color: #FFFFFF;
+}
+.logo {
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}

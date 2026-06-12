@@ -1,0 +1,31 @@
+.time-selector {
+  display: flex;
+  flex-direction: column; /* Empilha os elementos */
+  gap: 10px;              /* Espaçamento entre o input e o botão */
+    align-items: center;
+
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #F3F4F7;
+}
+
+.time-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.btn-google {
+  background-color: #0070D1;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center; /* Centraliza o texto no botão */
+  width: 90%;        /* Faz o botão ocupar a largura toda abaixo do input */
+  display: block;
+}

@@ -1,0 +1,277 @@
+/* ==========================================
+   TEMA PLAYSTATION CONCEPT (Health Tech Edition)
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;700;900&display=swap');
+
+:root {
+  --ps-blue: #0070D1;          /* Azul Icônico PlayStation */
+  --ps-blue-hover: #005AAB;
+  --ps-black: #000000;         /* Preto Total do Hero */
+  --ps-white: #FFFFFF;
+  --ps-dark-bg: #1A1A1A;       /* Fundo do Briefing */
+  --ps-light-bg: #F3F4F7;      /* Fundo da Página */
+  --ps-border: #D1D5DB;
+  
+  --transition: all 0.2s ease;
+}
+
+/* ==========================================
+   ESTILOS BASE
+   ========================================== */
+body {
+  background-color: var(--ps-light-bg);
+  color: #1F1F1F;
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  padding: 0 0 60px 0;
+  max-width: 100%;
+}
+
+
+/* ==========================================
+   CARDS DE SEÇÃO (Estilo PS Grids)
+   ========================================== */
+.section-card {
+  background-color: var(--ps-white);
+  padding: 40px;
+  margin: 0 auto 30px auto;
+  max-width: 920px;
+  border-radius: 0px; /* Cantos retos PS */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  border: 1px solid #E5E7EB;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ps-black);
+  margin-top: 0;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+/* ==========================================
+   FORMULÁRIOS E INPUTS
+   ========================================== */
+.grid-2-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-group h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--ps-black);
+  border-bottom: 2px solid var(--ps-black);
+  padding-bottom: 10px;
+  font-weight: 700;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--ps-border);
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: var(--ps-light-bg);
+  transition: var(--transition);
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  outline: none;
+  background-color: var(--ps-white);
+  border-color: var(--ps-blue);
+  box-shadow: inset 0 0 0 1px var(--ps-blue);
+}
+
+/* ==========================================
+   PLANNER
+   ========================================== */
+.planner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+.planner-day-card {
+  background-color: var(--ps-white);
+  padding: 20px;
+  border: 1px solid var(--ps-border);
+  border-left: 4px solid var(--ps-black);
+  transition: var(--transition);
+}
+
+.planner-day-card:hover {
+  border-left-color: var(--ps-blue);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.day-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--ps-black);
+  font-size: 1.1rem;
+  letter-spacing: -0.5px;
+  display: block;
+}
+
+.time-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--ps-light-bg);
+}
+
+.time-label {
+  font-size: 0.85rem;
+  color: #6B7280;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ==========================================
+   ALERTAS (Notificação)
+   ========================================== */
+.alert-box {
+  background-color: var(--ps-black);
+  color: var(--ps-white);
+  padding: 30px 40px;
+  margin: 0 auto 30px auto;
+  max-width: 920px;
+  border-left: 6px solid var(--ps-blue);
+}
+
+.alert-box h3 {
+  margin-top: 0;
+  color: var(--ps-blue);
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.alert-box p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==========================================
+   BRIEFING (PS Network Black)
+   ========================================== */
+.briefing-card {
+  background-color: var(--ps-dark-bg);
+  color: #fff;
+  padding: 40px;
+  margin: 0 auto;
+  max-width: 920px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.briefing-card h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #f7fafc;
+  text-transform: uppercase;
+}
+
+.briefing-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #e2e8f0;
+  margin-bottom: 30px;
+}
+
+/* ÁREA DE AGENDAMENTO */
+.export-area {
+  background-color: rgba(0,0,0,0.4);
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.export-area h4 {
+  margin: 0 0 20px 0;
+  color: #63b3ed;
+  text-transform: uppercase;
+}
+
+.agenda-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.agenda-item strong { color: white; }
+
+/* Botão Google Agenda (PS Style) */
+.btn-google {
+  background-color: var(--ps-blue);
+  color: var(--ps-white);
+  padding: 12px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-google:hover {
+  background-color: var(--ps-blue-hover);
+  transform: scale(1.02);
+}
+
+/* ==========================================
+   ANIMAÇÕES E MOBILE
+   ========================================== */
+@media (max-width: 768px) {
+  .hero-title { font-size: 1.8rem; }
+  .grid-2-col { grid-template-columns: 1fr; gap: 30px; }
+  .section-card, .alert-box, .briefing-card {
+    padding: 25px;
+    margin: 0 15px 25px 15px;
+  }
+  .agenda-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
+

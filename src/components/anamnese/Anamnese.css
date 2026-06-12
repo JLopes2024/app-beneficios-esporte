@@ -1,0 +1,19 @@
+.status-bar-container { margin-bottom: 20px; }
+.status-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; font-weight: bold; }
+.progress-bg { height: 12px; background: #E5E7EB; overflow: hidden; }
+.progress-fill { height: 100%; transition: width 0.4s ease; }
+
+.tempo-livre-card { 
+  margin-bottom: 30px; 
+  padding: 15px; 
+  background: #F3F4F7; 
+  border-left: 4px solid var(--ps-blue); 
+  display: flex; 
+  justify-content: space-between; 
+}
+
+.label-livre { font-weight: 700; color: #4A5568; text-transform: uppercase; }
+.status-error { color: #e53e3e; }
+.status-ok { color: #3182ce; }
+.valor-erro { font-weight: 900; color: #e53e3e; }
+.valor-ok { font-weight: 900; color: #2b6cb0; }
