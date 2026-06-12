@@ -12,6 +12,7 @@ function App() {
   const [horasTrabalho, setHorasTrabalho] = useState(8);
   const [horasEstudo, setHorasEstudo] = useState(4);
   const [horasTransito, setHorasTransito] = useState(2);
+  const [horasRedesSociais, setHorasRedesSociais] = useState(2);
   const [horasSono, setHorasSono] = useState(7);
   const [energiaHoje, setEnergiaHoje] = useState('alta');
   const [dorMuscular, setDorMuscular] = useState('nao');
@@ -20,7 +21,7 @@ function App() {
   const [estresse, setEstresse] = useState(5);
   const [motivacao, setMotivacao] = useState('alta');
 
-  const totalHoras = Number(horasTrabalho) + Number(horasEstudo) + Number(horasTransito) + Number(horasSono);
+  const totalHoras = Number(horasTrabalho) + Number(horasEstudo) + Number(horasTransito) + Number(horasRedesSociais) + Number(horasSono);
   const tempoLivre = 24 - totalHoras;
   const estaEstourado = totalHoras > 24;
 
@@ -44,6 +45,7 @@ function App() {
           horasTrabalho={horasTrabalho} setHorasTrabalho={setHorasTrabalho}
           horasEstudo={horasEstudo} setHorasEstudo={setHorasEstudo}
           horasTransito={horasTransito} setHorasTransito={setHorasTransito}
+          horasRedesSociais={horasRedesSociais} setHorasRedesSociais={setHorasRedesSociais}
           horasSono={horasSono} setHorasSono={setHorasSono}
           estresse={estresse} setEstresse={setEstresse}
           motivacao={motivacao} setMotivacao={setMotivacao}

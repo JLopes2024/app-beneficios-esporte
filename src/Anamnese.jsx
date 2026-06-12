@@ -3,16 +3,26 @@ import './Anamnese.css';
 export default function Anamnese({ 
   experiencia, setExperiencia, dorArticular, setDorArticular, 
   horasTrabalho, setHorasTrabalho, horasEstudo, setHorasEstudo, 
-  horasTransito, setHorasTransito, horasSono, setHorasSono,
+  horasTransito, setHorasTransito, horasRedesSociais, setHorasRedesSociais, horasSono, setHorasSono,
   estresse, setEstresse, motivacao, setMotivacao,
   totalHoras, estaEstourado, tempoLivre 
 }) {
 
-  const handleTempoChange = (valor, setter) => {
-    const num = parseInt(valor) || 0;
-    if (num < 0) setter(0);
-    else if (num > 24) setter(24);
-    else setter(num);
+  // NOVA TRAVA DE 24 HORAS
+  const handleTempoChange = (novoValor, valorAtual, setter) => {
+    let num = parseInt(novoValor) || 0;
+    if (num < 0) num = 0;
+
+    // Calcula o máximo de horas que este campo pode ter sem passar de 24h
+    // (Pega as 24h e subtrai a soma de todos os OUTROS campos)
+    const horasDisponiveis = 24 - (totalHoras - valorAtual);
+
+    if (num > horasDisponiveis) {
+      alert("⚠️ O dia só tem 24 horas!\n\nPara aumentar o tempo nesta atividade, você precisa reduzir o tempo de outra primeiro.");
+      setter(horasDisponiveis); // Trava no número máximo exato que sobrou
+    } else {
+      setter(num);
+    }
   };
 
   const getSonoStatus = (horas) => {
@@ -27,8 +37,6 @@ export default function Anamnese({
     <section id="avaliacao-section" className="section-card">
       <h2 className="section-title">📝 1. Como está sua rotina?</h2>
       
-      
-
       <div className="grid-2-col">
         <div className="form-group">
           <h4>Seu Perfil</h4>
@@ -54,25 +62,43 @@ export default function Anamnese({
           <div className="grid-2-col" style={{ gap: '10px' }}>
             <div className="input-wrapper">
               <label className="input-label">Trabalho:</label>
-              <input type="number" min="0" max="24" className="input-field" value={horasTrabalho} onChange={e => handleTempoChange(e.target.value, setHorasTrabalho)} />
+              <input 
+                type="number" min="0" max="24" className="input-field" 
+                value={horasTrabalho} 
+                onChange={e => handleTempoChange(e.target.value, horasTrabalho, setHorasTrabalho)} 
+              />
             </div>
             <div className="input-wrapper">
               <label className="input-label">Estudo:</label>
-              <input type="number" min="0" max="24" className="input-field" value={horasEstudo} onChange={e => handleTempoChange(e.target.value, setHorasEstudo)} />
+              <input 
+                type="number" min="0" max="24" className="input-field" 
+                value={horasEstudo} 
+                onChange={e => handleTempoChange(e.target.value, horasEstudo, setHorasEstudo)} 
+              />
             </div>
             <div className="input-wrapper">
               <label className="input-label">Trânsito:</label>
-              <input type="number" min="0" max="24" className="input-field" value={horasTransito} onChange={e => handleTempoChange(e.target.value, setHorasTransito)} />
+              <input 
+                type="number" min="0" max="24" className="input-field" 
+                value={horasTransito} 
+                onChange={e => handleTempoChange(e.target.value, horasTransito, setHorasTransito)} 
+              />
             </div>
             <div className="input-wrapper">
+              <label className="input-label">Redes Sociais:</label>
+              <input 
+                type="number" min="0" max="24" className="input-field" 
+                value={horasRedesSociais} 
+                onChange={e => handleTempoChange(e.target.value, horasRedesSociais, setHorasRedesSociais)} 
+              />
+            </div>
+            <div className="input-wrapper" style={{ gridColumn: '1 / -1' }}>
               <label className="input-label">Sono:</label>
               <input 
-                type="number" 
-                min="0" 
-                max="24" 
+                type="number" min="0" max="24" 
                 className={`input-field ${statusSono.tipo === 'ERRO' ? 'input-error' : ''}`} 
                 value={horasSono} 
-                onChange={e => handleTempoChange(e.target.value, setHorasSono)} 
+                onChange={e => handleTempoChange(e.target.value, horasSono, setHorasSono)} 
               />
               <small style={{ 
                 color: statusSono.tipo === 'ERRO' ? '#e53e3e' : statusSono.tipo === 'ALERTA' ? '#dd6b20' : '#3182ce',
@@ -102,6 +128,7 @@ export default function Anamnese({
         </div>
         
       </div>
+      
       {/* Barra de Tempo */}
       <div className="status-bar-container">
         <div className="status-header">
@@ -115,7 +142,7 @@ export default function Anamnese({
             className="progress-fill" 
             style={{ 
               width: `${Math.min((totalHoras / 24) * 100, 100)}%`, 
-              background: estaEstourado ? '#e53e3e' : '#0070D1' 
+              background: estaEstourado ? '#e53e3e' : '#00439C' 
             }} 
           />
         </div>
