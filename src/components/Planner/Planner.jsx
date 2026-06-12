@@ -5,7 +5,7 @@ import './Planner.css';
 export default function Planner({ planner, atualizarPlanner, opcoesPermitidas }) {
   return (
     <section className="section-card">
-      <h2 className="section-title">📅 2. Escalonamento no Calendário</h2>
+      <h2 className="section-title">📅 3. Plano de Ação</h2>
       <div className="planner-grid">
         {planner.map((sessao, index) => {
           // Busca o rótulo da atividade de forma segura antes de renderizar o botão
@@ -49,21 +49,18 @@ export default function Planner({ planner, atualizarPlanner, opcoesPermitidas })
 
                 {/* Exibe o botão APENAS se os 3 campos (Data, Atividade, Hora) estiverem preenchidos */}
                 {sessao.data && sessao.atividade && sessao.atividade !== 'descanso' && sessao.horario ? (
-                  <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                  <div className="agenda-btn-container">
                     <a 
                       href={gerarLinkAgenda(rotuloAtividade, sessao.data, sessao.horario)} 
                       target="_blank" 
                       rel="noreferrer" 
                       className="btn-google"
-                      style={{ width: '100%', justifyContent: 'center' }}
                     >
                       Agenda
                     </a>
                   </div>
                 ) : (
-                  <div style={{ marginTop: '10px', height: '42px' }}>
-                    {/* Mantém a altura do card igual mesmo quando o botão está escondido */}
-                  </div>
+                  <div className="agenda-placeholder"></div>
                 )}
               </div>
             </div>

@@ -1,0 +1,77 @@
+.zonas-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.zona-card {
+  padding: 16px 20px;
+  border-radius: 8px;
+  border-left: 6px solid;
+  background-color: #F9FAFB;
+  transition: all 0.2s ease;
+}
+
+.zona-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.zona-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.zona-nome {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: #121212;
+}
+
+.zona-bpm {
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.zona-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4B5563;
+  line-height: 1.4;
+}
+
+/* Cores das Zonas */
+.zona-1 { border-left-color: #9CA3AF; } /* Cinza */
+.zona-1 .zona-bpm { color: #9CA3AF; }
+
+.zona-2 { border-left-color: #3B82F6; } /* Azul */
+.zona-2 .zona-bpm { color: #3B82F6; }
+
+.zona-3 { border-left-color: #10B981; } /* Verde */
+.zona-3 .zona-bpm { color: #10B981; }
+
+.zona-4 { border-left-color: #F59E0B; } /* Laranja */
+.zona-4 .zona-bpm { color: #F59E0B; }
+
+.zona-5 { border-left-color: #EF4444; } /* Vermelho */
+.zona-5 .zona-bpm { color: #EF4444; }
+
+/* Efeito de bloqueio para segurança fisiológica */
+.zona-bloqueada {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+
+.zona-bloqueada .zona-bpm {
+  font-size: 0.9rem;
+  background-color: #E5E7EB;
+  color: #6B7280 !important;
+}

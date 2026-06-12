@@ -35,7 +35,7 @@ export default function Anamnese({
 
   return (
     <section id="avaliacao-section" className="section-card">
-      <h2 className="section-title">📝 1. Como está sua rotina?</h2>
+      <h2 className="section-title">📝 2. Como está sua rotina?</h2>
       
       <div className="grid-2-col">
         <div className="form-group">

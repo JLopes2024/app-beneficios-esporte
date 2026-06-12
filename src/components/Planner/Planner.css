@@ -1,39 +1,89 @@
+/* ==========================================
+   PLANNER GRID E CARDS
+   ========================================== */
+.planner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.planner-day-card {
+  background-color: #FFFFFF;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  border-top: 4px solid #121212; 
+  transition: all 0.3s ease;
+}
+
+.planner-day-card:hover {
+  border-top-color: #0070D1;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+}
+
+.day-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #121212;
+  font-size: 1.1rem;
+  letter-spacing: -0.5px;
+  display: block;
+}
+
+/* Container do seletor de horas */
 .time-selector {
   display: flex;
-  flex-direction: column; /* Empilha os elementos */
-  gap: 10px;              /* Espaçamento entre o input e o botão */
-    align-items: center;
-
+  align-items: center; 
+  gap: 15px;              
   margin-top: 15px;
-  padding-top: 10px;
+  padding-top: 15px;
   border-top: 1px solid #F3F4F7;
 }
 
-.time-input-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-}
-.btn-google {
-
-  background-color: #0070D1;
-  color: rgb(0, 0, 0);
-  padding: 5px;
-
-  border-radius: 4px;
-
-  text-decoration: none;
-
-  font-size: 0.5rem;
-
+.time-label {
+  font-size: 0.85rem;
+  color: #6B7280;
   font-weight: 700;
   text-transform: uppercase;
-  text-align: center; /* Centraliza o texto no botão */
+}
 
-  width: 50%;        /* Faz o botão ocupar a largura toda abaixo do input */
+/* Envelopes do Botão para manter tudo alinhado */
+.agenda-btn-container {
+  margin-top: 10px;
+  width: 100%;
+}
 
+.agenda-placeholder {
+  margin-top: 10px;
+  height: 42px; /* Altura exata do botão para manter o card do mesmo tamanho */
+}
+
+/* O Botão Agenda */
+.btn-google {
+  background-color: #0070D1;
+  color: #000000 !important; /* Trava o texto em PRETO absoluto */
+  padding: 12px 10px;
+  border-radius: 6px;
+  text-decoration: none !important;
+  font-size: 0.85rem;
+  font-weight: 900; /* Fonte mais grossa para contrastar bem com o azul */
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%; 
   display: block;
+  box-sizing: border-box; /* IMPEDE O VAZAMENTO PARA FORA DO CARD */
+  transition: all 0.2s ease;
+}
 
-} 
+/* Mantém a cor preta mesmo após clicado (visited) */
+.btn-google:visited,
+.btn-google:active {
+  color: #000000 !important;
+}
 
+.btn-google:hover {
+  background-color: #005AAB; 
+  color: #000000 !important;
+  transform: scale(1.02);
+}

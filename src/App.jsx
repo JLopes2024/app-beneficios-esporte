@@ -3,6 +3,7 @@ import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import Planner from './components/Planner/Planner';
 import Anamnese from './Anamnese';
+import ZonaAlvo from './components/ZonaAlvo';
 import { gerarRecomendacao, obterOpcoesDisponiveis, gerarBriefing, calcularDisponibilidadeNeuromuscular } from './utils/logicaApp';
 import './styles/App.css';
 
@@ -39,6 +40,8 @@ function App() {
       <Hero onStart={() => document.getElementById('main').scrollIntoView({ behavior: 'smooth' })} />
 
       <main id="main">
+             {/* COMPONENTE DE ZONA ALVO INSERIDO AQUI */}
+        <ZonaAlvo />
         <Anamnese 
           experiencia={experiencia} setExperiencia={setExperiencia}
           dorArticular={dorArticular} setDorArticular={setDorArticular}
@@ -64,6 +67,8 @@ function App() {
           opcoesPermitidas={obterOpcoesDisponiveis(experiencia, dorArticular, dorMuscular, energiaHoje, horasSono, estresse, motivacao)} 
           statusNeuromuscular={prontidao.status}
         />
+
+   
 
         <section className="briefing-card">
           <h2>📊 Resumo da Sua Agenda</h2>
