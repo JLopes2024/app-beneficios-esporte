@@ -8,7 +8,6 @@ export default function Anamnese({
   totalHoras, estaEstourado, tempoLivre 
 }) {
 
-  // Função para validar intervalos (0-24)
   const handleTempoChange = (valor, setter) => {
     const num = parseInt(valor) || 0;
     if (num < 0) setter(0);
@@ -16,16 +15,24 @@ export default function Anamnese({
     else setter(num);
   };
 
+  const getSonoStatus = (horas) => {
+    if (horas < 4) return { tipo: 'ERRO', msg: '⚠️ Perigoso: Muito pouco sono para o corpo descansar!' };
+    if (horas >= 4 && horas <= 6) return { tipo: 'ALERTA', msg: '⚠️ Atenção: Seu corpo não vai se recuperar 100% com esse tempo de sono.' };
+    return { tipo: 'OK', msg: '✅ Sono ótimo para ter energia.' };
+  };
+
+  const statusSono = getSonoStatus(horasSono);
+
   return (
     <section id="avaliacao-section" className="section-card">
-      <h2 className="section-title">📝 1. Anamnese e Rotina</h2>
+      <h2 className="section-title">📝 1. Como está sua rotina?</h2>
       
       {/* Barra de Tempo */}
       <div className="status-bar-container">
         <div className="status-header">
-          <span>Carga Horária: {totalHoras}h / 24h</span>
+          <span>Tempo Gasto no Dia: {totalHoras}h / 24h</span>
           <span className={estaEstourado ? 'status-error' : 'status-ok'}>
-            {estaEstourado ? '⚠️ Excedeu 24h!' : '✅ Dentro do limite'}
+            {estaEstourado ? '⚠️ Passou de 24h!' : '✅ Tudo certo'}
           </span>
         </div>
         <div className="progress-bg">
@@ -41,34 +48,34 @@ export default function Anamnese({
 
       {/* Tempo Livre */}
       <div className="tempo-livre-card">
-        <span className="label-livre">Tempo Livre:</span>
+        <span className="label-livre">Seu Tempo Livre:</span>
         <span className={tempoLivre < 0 ? 'valor-erro' : 'valor-ok'}>
-          {tempoLivre >= 0 ? `${tempoLivre} horas` : '⚠️ Rotina impossível'}
+          {tempoLivre >= 0 ? `${tempoLivre} horas` : '⚠️ Rotina impossível (reveja os horários)'}
         </span>
       </div>
 
       <div className="grid-2-col">
         <div className="form-group">
-          <h4>Perfil Físico</h4>
+          <h4>Seu Perfil</h4>
           <div className="input-wrapper">
-            <label className="input-label">Nível de Experiência:</label>
+            <label className="input-label">Você já treina há muito tempo?</label>
             <select className="input-field" value={experiencia} onChange={e => setExperiencia(e.target.value)}>
-              <option value="iniciante">Iniciante</option>
-              <option value="intermediario">Intermediário</option>
-              <option value="avancado">Avançado</option>
+              <option value="iniciante">Sou Iniciante</option>
+              <option value="intermediario">Já treino (Intermediário)</option>
+              <option value="avancado">Sou Avançado</option>
             </select>
           </div>
           <div className="input-wrapper">
-            <label className="input-label">Restrição Articular?</label>
+            <label className="input-label">Tem alguma lesão ou dor nas juntas?</label>
             <select className="input-field" value={dorArticular} onChange={e => setDorArticular(e.target.value)}>
-              <option value="nao">Não, livre de restrições</option>
-              <option value="sim">Sim, possuo limitações ativas</option>
+              <option value="nao">Não, estou 100%</option>
+              <option value="sim">Sim, sinto dor ou tenho lesão</option>
             </select>
           </div>
         </div>
 
         <div className="form-group">
-          <h4>Alocação de Tempo (Horas)</h4>
+          <h4>Como você divide seu dia (Horas)</h4>
           <div className="grid-2-col" style={{ gap: '10px' }}>
             <div className="input-wrapper">
               <label className="input-label">Trabalho:</label>
@@ -84,22 +91,37 @@ export default function Anamnese({
             </div>
             <div className="input-wrapper">
               <label className="input-label">Sono:</label>
-              <input type="number" min="0" max="24" className="input-field" value={horasSono} onChange={e => handleTempoChange(e.target.value, setHorasSono)} />
+              <input 
+                type="number" 
+                min="0" 
+                max="24" 
+                className={`input-field ${statusSono.tipo === 'ERRO' ? 'input-error' : ''}`} 
+                value={horasSono} 
+                onChange={e => handleTempoChange(e.target.value, setHorasSono)} 
+              />
+              <small style={{ 
+                color: statusSono.tipo === 'ERRO' ? '#e53e3e' : statusSono.tipo === 'ALERTA' ? '#dd6b20' : '#3182ce',
+                fontWeight: 'bold',
+                display: 'block',
+                marginTop: '5px'
+              }}>
+                {statusSono.msg}
+              </small>
             </div>
           </div>
         </div>
 
         <div className="form-group">
-          <h4>Como está seu nível de estresse hoje?</h4>
+          <h4>Como você está se sentindo hoje?</h4>
           <div className="input-wrapper">
-            <label className="input-label">Estresse (1-10): {estresse}</label>
+            <label className="input-label">Estresse (1 a 10): {estresse}</label>
             <input type="range" min="1" max="10" className="input-field" value={estresse} onChange={e => setEstresse(e.target.value)} />
           </div>
           <div className="input-wrapper">
-            <label className="input-label">Motivação hoje:</label>
+            <label className="input-label">Vontade de treinar (Motivação):</label>
             <select className="input-field" value={motivacao} onChange={e => setMotivacao(e.target.value)}>
-              <option value="alta">Alta</option>
-              <option value="baixa">Baixa</option>
+              <option value="alta">Alta (Estou animado!)</option>
+              <option value="baixa">Baixa (Estou desanimado...)</option>
             </select>
           </div>
         </div>

@@ -3,8 +3,6 @@ import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import Planner from './components/Planner/Planner';
 import Anamnese from './Anamnese';
-
-// Adicionei calcularDisponibilidadeNeuromuscular aqui
 import { gerarRecomendacao, obterOpcoesDisponiveis, gerarBriefing, calcularDisponibilidadeNeuromuscular } from './utils/logicaApp';
 import './styles/App.css';
 
@@ -19,18 +17,14 @@ function App() {
   const [dorMuscular, setDorMuscular] = useState('nao');
   const [planner, setPlanner] = useState(Array.from({ length: 7 }, (_, i) => ({ id: i, data: '', atividade: '', horario: '' })));
   
-  // Novos Estados
   const [estresse, setEstresse] = useState(5);
-  const [sonoAtual, setSonoAtual] = useState(7);
   const [motivacao, setMotivacao] = useState('alta');
 
-  // Cálculos
   const totalHoras = Number(horasTrabalho) + Number(horasEstudo) + Number(horasTransito) + Number(horasSono);
   const tempoLivre = 24 - totalHoras;
   const estaEstourado = totalHoras > 24;
 
-  // Função de decisão (usando o sonoAtual para comparar com o sono ideal)
-  const prontidao = calcularDisponibilidadeNeuromuscular(estresse, sonoAtual, 8, motivacao);
+  const prontidao = calcularDisponibilidadeNeuromuscular(estresse, horasSono, 8, motivacao);
 
   const atualizarPlanner = (index, campo, valor) => {
     const novoPlanner = [...planner];
@@ -57,16 +51,20 @@ function App() {
         />
 
         <section className="alert-box">
-          <h3>💡 Diretriz Operacional:</h3>
-          {/* Adicionei o feedback visual da prontidão aqui */}
-          <p style={{ color: prontidao.cor, fontWeight: 'bold' }}>Status Neuromuscular: {prontidao.status}</p>
+          <h3>💡 Sua Recomendação de Hoje:</h3>
+          <p style={{ color: prontidao.cor, fontWeight: 'bold' }}>Sua Energia para Treinar: {prontidao.status}</p>
           <p>{gerarRecomendacao(experiencia, dorArticular, '3 dias', horasTrabalho, horasEstudo, horasTransito, horasSono, energiaHoje, dorMuscular)}</p>
         </section>
 
-        <Planner planner={planner} atualizarPlanner={atualizarPlanner} opcoesPermitidas={obterOpcoesDisponiveis(experiencia, dorArticular, dorMuscular, energiaHoje, horasSono)} />
+        <Planner 
+          planner={planner} 
+          atualizarPlanner={atualizarPlanner} 
+          opcoesPermitidas={obterOpcoesDisponiveis(experiencia, dorArticular, dorMuscular, energiaHoje, horasSono, estresse, motivacao)} 
+          statusNeuromuscular={prontidao.status}
+        />
 
         <section className="briefing-card">
-          <h2>📊 Balanço Geral</h2>
+          <h2>📊 Resumo da Sua Agenda</h2>
           <p className="briefing-text">{gerarBriefing(planner, experiencia, dorArticular, dorMuscular, horasSono, horasTrabalho, horasEstudo)}</p>
         </section>
       </main>
