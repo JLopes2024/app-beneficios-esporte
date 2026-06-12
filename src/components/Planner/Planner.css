@@ -16,28 +16,24 @@
   width: 100%;
 }
 .btn-google {
+
   background-color: #0070D1;
-  color: #FFFFFF !important; /* Força o branco sobrepondo o navegador */
-  padding: 10px;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+
   border-radius: 4px;
-  text-decoration: none !important; /* Garante que nunca terá sublinhado */
-  font-size: 0.8rem;
+
+  text-decoration: none;
+
+  font-size: 0.5rem;
+
   font-weight: 700;
   text-transform: uppercase;
-  text-align: center;
-  width: 90%;
+  text-align: center; /* Centraliza o texto no botão */
+
+  width: 50%;        /* Faz o botão ocupar a largura toda abaixo do input */
+
   display: block;
-  transition: all 0.2s ease; /* Deixa o efeito do mouse mais suave */
-}
 
-/* Trava a cor branca mesmo depois de clicado (visited) ou selecionado (active) */
-.btn-google:visited,
-.btn-google:active {
-  color: #FFFFFF !important;
-}
+} 
 
-/* Adiciona um pequeno efeito visual ao passar o mouse */
-.btn-google:hover {
-  background-color: #005AAB; 
-  color: #FFFFFF !important;
-}
