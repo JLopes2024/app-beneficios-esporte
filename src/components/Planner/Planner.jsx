@@ -7,49 +7,68 @@ export default function Planner({ planner, atualizarPlanner, opcoesPermitidas })
     <section className="section-card">
       <h2 className="section-title">📅 2. Escalonamento no Calendário</h2>
       <div className="planner-grid">
-        {planner.map((sessao, index) => (
-          <div key={sessao.id} className="planner-day-card">
-            <span className="day-title">Sessão {index + 1}</span>
-            <input 
-              type="date" 
-              className="input-field" 
-              value={sessao.data} 
-              onChange={e => atualizarPlanner(index, 'data', e.target.value)} 
-            />
-            
-            <select 
-              className="input-field" 
-              value={sessao.atividade} 
-              onChange={e => atualizarPlanner(index, 'atividade', e.target.value)}
-            >
-              {opcoesPermitidas.map(op => <option key={op.valor} value={op.valor}>{op.rotulo}</option>)}
-            </select>
+        {planner.map((sessao, index) => {
+          // Busca o rótulo da atividade de forma segura antes de renderizar o botão
+          const atividadeSelecionada = opcoesPermitidas.find(o => o.valor === sessao.atividade);
+          const rotuloAtividade = atividadeSelecionada ? atividadeSelecionada.rotulo : 'Treino';
 
-            {sessao.atividade && sessao.atividade !== 'descanso' && (
-              <div className="time-selector">
-                <span className="time-label">Hora:</span>
+          return (
+            <div key={sessao.id} className="planner-day-card">
+              <span className="day-title">Sessão {index + 1}</span>
+              
+              <div className="form-group" style={{ marginTop: '15px', gap: '15px' }}>
                 <input 
-                  type="time" 
+                  type="date" 
                   className="input-field" 
-                  value={sessao.horario} 
-                  onChange={e => atualizarPlanner(index, 'horario', e.target.value)} 
+                  value={sessao.data} 
+                  onChange={e => atualizarPlanner(index, 'data', e.target.value)} 
                 />
-                <a 
-                  href={gerarLinkAgenda(
-                    opcoesPermitidas.find(o => o.valor === sessao.atividade)?.rotulo || 'Treino', 
-                    sessao.data, 
-                    sessao.horario
-                  )} 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="btn-google"
+                
+                <select 
+                  className="input-field" 
+                  value={sessao.atividade} 
+                  onChange={e => atualizarPlanner(index, 'atividade', e.target.value)}
                 >
-                  Agenda
-                </a>
+                  {opcoesPermitidas.map(op => (
+                    <option key={op.valor} value={op.valor}>{op.rotulo}</option>
+                  ))}
+                </select>
+
+                {/* Exibe o horário apenas se selecionou algo e NÃO for descanso */}
+                {sessao.atividade && sessao.atividade !== 'descanso' && (
+                  <div className="time-selector">
+                    <span className="time-label">Hora:</span>
+                    <input 
+                      type="time" 
+                      className="input-field" 
+                      value={sessao.horario} 
+                      onChange={e => atualizarPlanner(index, 'horario', e.target.value)} 
+                    />
+                  </div>
+                )}
+
+                {/* Exibe o botão APENAS se os 3 campos (Data, Atividade, Hora) estiverem preenchidos */}
+                {sessao.data && sessao.atividade && sessao.atividade !== 'descanso' && sessao.horario ? (
+                  <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                    <a 
+                      href={gerarLinkAgenda(rotuloAtividade, sessao.data, sessao.horario)} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="btn-google"
+                      style={{ width: '100%', justifyContent: 'center' }}
+                    >
+                      Agenda
+                    </a>
+                  </div>
+                ) : (
+                  <div style={{ marginTop: '10px', height: '42px' }}>
+                    {/* Mantém a altura do card igual mesmo quando o botão está escondido */}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
